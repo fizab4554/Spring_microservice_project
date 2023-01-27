@@ -1,0 +1,24 @@
+server:
+  port: 8585
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      routes:
+      - id: PROVIDER-MS
+        uri: http://localhost:8181/
+        predicates:
+          - Path=/provider/**    
+            
+      - id: FEIGN-CONSUMER
+        uri: http://localhost:9898/
+        predicates:
+          - Path=/feignconsumer/**
+        
+      - id: CUSTOMERS-MS
+        uri: http://localhost:6000/
+        predicates:
+          - Path=/customers/**
